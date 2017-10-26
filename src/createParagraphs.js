@@ -1,4 +1,5 @@
-import terms from './cryptoTerms';
+import cryptoTerms from './cryptoTerms';
+import sentenceTypes from './sentenceTypes';
 
 const createFillerText = (paragraphs) => {
 	let str = '';
@@ -10,16 +11,13 @@ const createFillerText = (paragraphs) => {
 
 
 const createParagraph = () => {
-	const termArray = terms.full.slice(0);
-	const sentenceWordLength = Math.floor(Math.random() * 7) + 5; //5;
+	let str ='';
+	const terms = cryptoTerms.newTermsCreator();
 	const paragraphSentenceLength = Math.floor(Math.random() * 3) + 3;
 
-	let str ='';
-
-	termArray.sort((a,b) => (Math.random() * 1) - (Math.random() * 1))
-
 	for (let i = 0; i < paragraphSentenceLength; i++) {
-		str += createSentence(sentenceWordLength, termArray.splice(0, sentenceWordLength));
+		const randomSentIndex = Math.floor(Math.random() * sentenceTypes.length)
+		str += createSentence(sentenceTypes[randomSentIndex], terms);
 		if (i != length - 1) {
 			str += ' ';
 		}
@@ -28,15 +26,19 @@ const createParagraph = () => {
 	return str;
 }
 
-
-const createSentence = (length, wordArray) => {
+const createSentence = (sentenceType, terms) => {
 	let str = '';
-	for (let i = 0; i < length; i++) {
-		let wrd = wordArray[i]
+	const wordTypeArray = sentenceType.split(' ')
+
+	for (let i = 0; i < wordTypeArray.length; i++) {
+		if (!terms[wordTypeArray[i]].length) {
+			terms[wordTypeArray[i]] = cryptoTerms.newTermsCreator()[wordTypeArray[i]]
+		}
+		let wrd = terms[wordTypeArray[i]].splice(0, 1)[0]
 		if (!i) {
 			wrd = wrd.slice(0,1).toUpperCase() + wrd.slice(1, wrd.length)
 		}
-		if (i != length - 1) {
+		if (i != wordTypeArray.length - 1) {
 			wrd += ' ';
 		} else {
 			wrd += '.';
@@ -45,7 +47,7 @@ const createSentence = (length, wordArray) => {
 	}
 
 	return str
-	
+
 }
 
 

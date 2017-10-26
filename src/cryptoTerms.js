@@ -1,4 +1,4 @@
-const things = [
+const noun = [
 	'ledger',
 	'cryptography',
 	'proof',
@@ -28,9 +28,14 @@ const things = [
 	'stack',
 	'proof-of-work',
 	'signature',
+	'web3',
+	'token',
+	'DAO',
+	'IPFS',
+	'state',
 ]
 
-const verbs = [
+const verb = [
 	'sign',
 	'hash',
 	'build',
@@ -38,9 +43,12 @@ const verbs = [
 	'send',
 	'transact',
 	'transfer',
+	'verify',
+	'fail',
+
 ]
 
-const adjectives = [
+const adjective = [
 	'safe',
 	'secure',
 	'digital',
@@ -49,18 +57,64 @@ const adjectives = [
 	'distributed',
 	'peer-to-peer',
 	'turing-complete',
+	'trustless',
+	'stateless',
 ]
 
-const prepositions = [
+const adverb = [
+	'cryptographically',
+	'securely',
+	'concurrently',
+	'successfully',
+	'also',
+	'however',
+]
+
+const preposition = [
 	'in',
 	'towards',
 	'on',
+	'with',
+	'at',
+	'from',
+	'during',
+	'throughout',
+	'across',
 ]
 
+const article = [
+	'the',
+	'a',
+	'an',
+	'it',
+]
+
+const conjunction = [
+	'and',
+	'if',
+	'because',
+	'when',
+	'also',
+]
+
+const newTermsCreator = () => ({
+	noun: noun.sort((a,b) => (Math.random() * 1) - (Math.random() * 1)).slice(0),
+	verb: verb.sort((a,b) => (Math.random() * 1) - (Math.random() * 1)).slice(0),
+	adjective: adjective.sort((a,b) => (Math.random() * 1) - (Math.random() * 1)).slice(0),
+	adverb: adverb.sort((a,b) => (Math.random() * 1) - (Math.random() * 1)).slice(0),
+	preposition: preposition.sort((a,b) => (Math.random() * 1) - (Math.random() * 1)).slice(0),
+	article: article.sort((a,b) => (Math.random() * 1) - (Math.random() * 1)).slice(0),
+	conjunction: conjunction.sort((a,b) => (Math.random() * 1) - (Math.random() * 1)).slice(0),
+})
+
 export default {
-	things,
-	verbs,
-	adjectives,
-	prepositions,
-	full: things.concat(verbs, adjectives, prepositions),
+	noun,
+	verb,
+	adjective,
+	adverb,
+	preposition,
+	article,
+	conjunction,
+	newTermsCreator,
+	full: noun.concat(adjective, adverb, preposition, article, conjunction),
 }
