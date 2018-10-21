@@ -68,6 +68,7 @@ const adverb = [
 	'successfully',
 	'also',
 	'however',
+	'swiftly',
 ]
 
 const preposition = [
